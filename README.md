@@ -8,7 +8,7 @@ A small forum where you can post about your interests. This site supports the ab
 
 You will need to have React and NodeJS as they serve as the front and back end of the application respectively.
 
-After installation, you will have to install the [Express](https://expressjs.com/), [CORS](https://www.npmjs.com/package/cors), and [Nodemon](https://www.npmjs.com/package/nodemon) libraries. Express allows us to easily build our web application with NodeJS, CORS is used to communicate with different domains, and Nodemon is used to restart the server when a change is detected in the injex.js file
+After installation, you will have to install the [ExpressJS](https://expressjs.com/), [CORS](https://www.npmjs.com/package/cors), and [Nodemon](https://www.npmjs.com/package/nodemon) libraries. ExpressJS allows us to easily build our web application with NodeJS, CORS is used to communicate with different domains, and Nodemon is used to restart the server when a change is detected in the index.js file
 
 To download these libraries, you can run the following command
 
