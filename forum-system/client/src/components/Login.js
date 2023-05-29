@@ -4,7 +4,7 @@ import {Link, json, useNavigate} from "react-router-dom"
 const navigate = useNavigate()
 
 const signIn = () => {
-    fetch("http://localhost:4000/api/login", {
+    fetch("http://localhost:3000/api/login", {
         method:"POST",
         body: JSON.stringify({
             username,

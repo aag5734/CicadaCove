@@ -75,6 +75,12 @@ app.post("/api/create/thread", async(req, res) =>{
     })
 })
 
+app.get("/api/all/threads", (req, res) => {
+    res.json({
+        threads: threads
+    })
+})
+
 
 
 app.listen(PORT, () => {

@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom"
 const navigate = useNavigate()
 
 const signUp = () => {
-    fetch("http://localhost:4000/api/register", {
+    fetch("http://localhost:3000/api/register", {
         method: "POST",
         body: JSON.stringify({
             username,

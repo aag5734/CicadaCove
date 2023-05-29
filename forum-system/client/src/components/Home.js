@@ -8,16 +8,21 @@ const Home = () => {
     const [threads, setThreads] = useState([])
 
     useEffect(() => {
-        if (!localStorage.getItem("_id")) {
-            navigate("/")
-        } else {
-            console.log("Authenticated")
+        const checkUser = () => {
+            if (!localStorage.getItem("_id")) {
+                navigate("/")
+            } else {
+                fetch("http://localhost:3000/api/all/threads")
+                    .then((res) => res.json())
+                    .then((data) => setThreadList(data.threads))
+                    .catch((err) => console.error(err));
+            }
         }
         checkUser()
     }, [Navigate])
 
     const createThread = () => {
-        fetch("http://localhost:4000/api/create/thread", {
+        fetch("http://localhost:3000/api/create/thread", {
             method: "POST",
             body: JSON.stringify({
                 thread,
@@ -35,7 +40,7 @@ const Home = () => {
     }
 
     const createThreads = () => {
-        fetch("http://localhost:4000/api/create/thread", {
+        fetch("http://localhost:3000/api/create/thread", {
             method:"POST",
             body: JSON.stringify({
                 thread,
