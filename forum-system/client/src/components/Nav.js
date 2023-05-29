@@ -2,6 +2,10 @@ import React from "react"
 import banner from "./assets/banner.jpg"
 
 const Nav = () => {
+    const signOut = () => {
+        localStorage("_id")
+        navigate("/")
+    }
     return (
         <nav className='navBar'>
             <div classname='navBarCenter'>

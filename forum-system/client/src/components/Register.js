@@ -1,7 +1,34 @@
 import React, {useState} from "react"
 import {Link, useNavigate} from "react-router-dom"
 
-const Login = () => {
+const navigate = useNavigate()
+
+const signUp = () => {
+    fetch("http://localhost:4000/api/register", {
+        method: "POST",
+        body: JSON.stringify({
+            username,
+            email,
+            password
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        },
+    })
+        .then((res) => res.join())
+        .then((data) => {
+            if (data.error_message) {
+                alert(data.error_message)
+            } else {
+                alert("Welcome to CicadaCove. Enjoy your stay")
+                navigate("/")
+            }
+        })
+        .catch((err) => console.error(err))
+        
+}
+
+const Register = () => {
     const [username, setUser] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -12,6 +39,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log({username, email, password})
+        signUp()
         setUser("")
         setEmail("")
         setPassword("")
