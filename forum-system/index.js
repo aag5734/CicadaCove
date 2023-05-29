@@ -3,6 +3,7 @@ const cors = require("cors")
 const app = express()
 const PORT = 4000
 const users = []
+const threads = []
 const randomID = () => Math.random().toString(36).substring(2,10)
 
 app.use(express.urlencoded({extended:true}))
@@ -53,6 +54,25 @@ app.post("/api/login", async(req, res) => {
             id: result[0].id
         })
     }
+})
+
+/*
+Handles thread creation
+*/
+app.post("/api/create/thread", async(req, res) =>{
+    const {thread, userId} = req.body
+    const threadID = randomID()
+    threads.unshift({
+        id: threadID,
+        title: thread,
+        userId,
+        replies: [],
+        likes: []
+    })
+    res.json({
+        message: "Thread made successfully",
+        threads: threads
+    })
 })
 
 
