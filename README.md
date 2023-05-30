@@ -15,3 +15,9 @@ To download these libraries, you can run the following command
 ```
 npm install express cors nodemon
 ```
+
+Once you have everything downloaded, you can run the following command in the src directory
+
+```
+npm start
+```
