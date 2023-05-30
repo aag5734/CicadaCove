@@ -20,20 +20,24 @@ app.get("/api", (req, res) => {
 Checks to see if a user already exists given credentials. Otherwise pushes onto the array
 of exisiting users.
 */
-app.post("/api/register", async(req, res) => {
-    const {username, email, password} = req.body
-    const id = randomID()
-    const result = users.filter(
-        (user) => user.email == email && user.username == username && user.password == password
-    )
-    if (result.length == 0) {
-        const newUser = {id, username, email, password}
-        users.push(newUser)
-    } else {
-        return res.join({
-            error_message: "User already exists"
-        })
-    }
+app.post("/register", async (req, res) => {
+	const { email, password, username } = req.body
+	const id = randomID()
+	const result = users.filter(
+		(user) => user.email === email && user.password === password
+	)
+
+	if (result.length === 0) {
+		const newUser = { id, email, password, username }
+
+		users.push(newUser)
+		return res.json({
+			message: "Account created successfully!",
+		})
+	}
+	res.json({
+		error_message: "User already exists",
+	})
 })
 
 /*
@@ -45,11 +49,11 @@ app.post("/api/login", async(req, res) => {
         (user) => user.username == username && user.password == password
     )
     if (result.length != 1) {
-        return res.join({
+        return res.json({
             error_message: "That user doesn't exist"
         })
     } else {
-        return res.join({
+        return res.json({
             message: "Login successful",
             id: result[0].id
         })
@@ -86,7 +90,7 @@ app.post("/api/thread/like", (req, res) => {
 
     if (authenticate.length === 0) {
         threadsLikes.push(userId)
-        return res.join({
+        return res.json({
             message: "You liked the post"
         })
     }

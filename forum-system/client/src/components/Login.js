@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import {Link, useNavigate} from "react-router-dom"
 
 const Login = () => {
-    const [username, setUser] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ const Login = () => {
                 "Content-Type": "application/json"
             }
         })
-            .then((res) => res.join())
+            .then((res) => res.json())
             .then((data) => {
                 if (data.error_message) {
                     alert(data.error_message)
@@ -38,7 +38,7 @@ const Login = () => {
         e.preventDefault()
         console.log({username, password})
         signIn()
-        setUser("")
+        setUsername("")
         setPassword("")
     }
 
@@ -53,7 +53,7 @@ const Login = () => {
                     id='username'
                     required
                     value={username}
-                    onChange={(e) => setUser(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
                 <label htmlFor='Password'>Password</label>
                 <input

@@ -21,3 +21,5 @@ Once you have everything downloaded, you can run the following command in the sr
 ```
 npm start
 ```
+
+This project was done to help me get to know React for projects that I hope to start in the future. Hence, there may be a few issues.
