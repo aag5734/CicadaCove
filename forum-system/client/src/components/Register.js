@@ -1,37 +1,37 @@
 import React, {useState} from "react"
 import {Link, useNavigate} from "react-router-dom"
 
-const navigate = useNavigate()
-
-const signUp = () => {
-    fetch("http://localhost:3000/api/register", {
-        method: "POST",
-        body: JSON.stringify({
-            username,
-            email,
-            password
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        },
-    })
-        .then((res) => res.join())
-        .then((data) => {
-            if (data.error_message) {
-                alert(data.error_message)
-            } else {
-                alert("Welcome to CicadaCove. Enjoy your stay")
-                navigate("/")
-            }
-        })
-        .catch((err) => console.error(err))
-        
-}
-
 const Register = () => {
     const [username, setUser] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    const navigate = useNavigate()
+
+    const signUp = () => {
+        fetch("http://localhost:3000/api/register", {
+            method: "POST",
+            body: JSON.stringify({
+                username,
+                email,
+                password
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+            .then((res) => res.join())
+            .then((data) => {
+                if (data.error_message) {
+                    alert(data.error_message)
+                } else {
+                    alert("Welcome to CicadaCove. Enjoy your stay")
+                    navigate("/")
+                }
+            })
+            .catch((err) => console.error(err))
+            
+    }
 
     /*
     Handles form submissions

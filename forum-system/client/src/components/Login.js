@@ -1,34 +1,35 @@
 import React, {useState} from "react"
-import {Link, json, useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
-const navigate = useNavigate()
-
-const signIn = () => {
-    fetch("http://localhost:3000/api/login", {
-        method:"POST",
-        body: JSON.stringify({
-            username,
-            password
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then((res) => res.join())
-        .then((data) => {
-            if (data.error_message) {
-                alert(data.error_message)
-            } else {
-                alert(data.message)
-                navigate("/dashboard")
-                localStorage.setItem("_id", data.id)
-            }
-        })
-        .catch((err) => console.error(err))
-}
 const Login = () => {
     const [username, setUser] = useState("")
     const [password, setPassword] = useState("")
+
+    const navigate = useNavigate()
+
+    const signIn = () => {
+        fetch("http://localhost:3000/api/login", {
+            method:"POST",
+            body: JSON.stringify({
+                username,
+                password
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => res.join())
+            .then((data) => {
+                if (data.error_message) {
+                    alert(data.error_message)
+                } else {
+                    alert(data.message)
+                    navigate("/dashboard")
+                    localStorage.setItem("_id", data.id)
+                }
+            })
+            .catch((err) => console.error(err))
+    }
 
     /*
     Handles form submissions

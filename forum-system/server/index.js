@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const app = express()
-const PORT = 4000
+const PORT = 3000
 const users = []
 const threads = []
 const randomID = () => Math.random().toString(36).substring(2,10)
@@ -75,13 +75,67 @@ app.post("/api/create/thread", async(req, res) =>{
     })
 })
 
+/*
+Gets all likes
+*/
+app.post("/api/thread/like", (req, res) => {
+    const {threadId, userId} = req.body
+    const result = threads.filter((thread) => thread.id === threadId)
+    const threadLikes = result[0].likes
+    const authenticate = threadLikes.filter((user) => user === userId)
+
+    if (authenticate.length === 0) {
+        threadsLikes.push(userId)
+        return res.join({
+            message: "You liked the post"
+        })
+    }
+
+    return res.json({
+        error_message: "You can only react once"
+    })
+})
+
+/*
+Displays all replies to a given thread
+*/
+app.post("/api/thread/replies", (req, res) => {
+    const {id} = req.body
+    const result = threads.filter((thread) => threadId === id)
+
+    return res.json({
+        replies: result[0].replies,
+        title: result[0].title
+    })
+})
+
+/*
+Creates a reply to a post
+*/
+app.post("/api/create/reply", async(req, res) => {
+    const {id, userId, reply} = req.body
+    const result = threads.filter((thread) => threadId === id)
+    const user = users.filter((user) => user.id === userId)
+
+    result[0].replies.unshift({
+        userId: user[0].id,
+        name: user[0].username,
+        text: reply
+    })
+
+    return res.json({
+        message: "Response added successfully"
+    })
+})
+
+/*
+Gets all exisiting threads
+*/
 app.get("/api/all/threads", (req, res) => {
     res.json({
         threads: threads
     })
 })
-
-
 
 app.listen(PORT, () => {
     console.log('Server listening on ${PORT}')

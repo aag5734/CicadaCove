@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react"
 import Nav from "./Nav"
+import Likes from "../utils/Likes"
+import Comments from "../utils/Comments"
 import { useNavigate } from "react-router-dom"
 
 const Home = () => {
@@ -14,12 +16,12 @@ const Home = () => {
             } else {
                 fetch("http://localhost:3000/api/all/threads")
                     .then((res) => res.json())
-                    .then((data) => setThreadList(data.threads))
+                    .then((data) => setThreads(data.threads))
                     .catch((err) => console.error(err));
             }
         }
         checkUser()
-    }, [Navigate])
+    }, [navigate])
 
     const createThread = () => {
         fetch("http://localhost:3000/api/create/thread", {
@@ -53,7 +55,7 @@ const Home = () => {
             .then((res) => res.json())
             .then((data) => {
                 alert(data.message);
-                setThreadList(data.threads);
+                setThreads(data.threads);
             })
             .catch((err) => console.error(err));
     }
